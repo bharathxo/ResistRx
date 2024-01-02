@@ -1,0 +1,53 @@
+using UnityEngine;
+
+public class CityBuilder : MonoBehaviour
+{
+    // Prefabs for different types of buildings
+    public GameObject residentialBuildingPrefab;
+    public GameObject commercialBuildingPrefab;
+    public GameObject industrialBuildingPrefab;
+
+    // Method to place a building in the city
+    public void PlaceBuilding(Vector3 position, BuildingType buildingType)
+    {
+        GameObject buildingPrefab = GetBuildingPrefab(buildingType);
+        if (buildingPrefab != null)
+        {
+            Instantiate(buildingPrefab, position, Quaternion.identity);
+        }
+    }
+
+    // Helper method to get the correct building prefab based on type
+    private GameObject GetBuildingPrefab(BuildingType buildingType)
+    {
+        switch (buildingType)
+        {
+            case BuildingType.Residential:
+                return residentialBuildingPrefab;
+            case BuildingType.Commercial:
+                return commercialBuildingPrefab;
+            case BuildingType.Industrial:
+                return industrialBuildingPrefab;
+            default:
+                return null;
+        }
+    }
+}
+
+// Enum to represent different types of buildings
+public enum BuildingType
+{
+    Residential,
+    Commercial,
+    Industrial
+}
+public class GameManager : MonoBehaviour
+{
+    public CityBuilder cityBuilder;
+
+    void Start()
+    {
+        // Example: Place a residential building at position (0, 0, 0)
+        cityBuilder.PlaceBuilding(new Vector3(0, 0, 0), BuildingType.Residential);
+    }
+}
