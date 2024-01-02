@@ -1,0 +1,52 @@
+import random
+
+class AntiDrugGame:
+    def _init_(self):
+        self.score = 0
+
+    def display_intro(self):
+        print("Welcome to the Anti-Drug Education Game!")
+        print("Make decisions and learn about the consequences of drug use.\n")
+
+    def make_decision(self):
+        options = ["A", "B", "C"]
+        print("Choose an option:")
+        for option in options:
+            print(f"{option}. Option {option}")
+
+        user_choice = input("Your choice: ").upper()
+
+        if user_choice in options:
+            return user_choice
+        else:
+            print("Invalid choice. Try again.")
+            return self.make_decision()
+
+    def play_round(self):
+        print("\nNew Scenario:")
+        print("You encounter a situation related to drug use.")
+
+        user_choice = self.make_decision()
+
+        # Simulate consequences based on user's choice
+        if user_choice == "A":
+            print("You made a positive choice. +1 point!")
+            self.score += 1
+        else:
+            print("Negative consequences. No points gained.")
+
+    def display_results(self):
+        print("\nGame Over!")
+        print(f"Your final score: {self.score}")
+
+def main():
+    game = AntiDrugGame()
+    game.display_intro()
+
+    for _ in range(3):  # Simulating 3 rounds for brevity
+        game.play_round()
+
+    game.display_results()
+
+if _name_ == "_main_":
+    main()
